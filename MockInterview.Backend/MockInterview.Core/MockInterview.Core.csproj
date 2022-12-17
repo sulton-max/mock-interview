@@ -7,8 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Constants" />
-      <Folder Include="Extensions" />
       <Folder Include="Models\Entities" />
       <Folder Include="Models\Enums" />
     </ItemGroup>
