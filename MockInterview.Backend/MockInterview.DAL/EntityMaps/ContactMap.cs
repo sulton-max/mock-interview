@@ -4,7 +4,7 @@ using MockInterview.Core.Models.Entities;
 
 namespace MockInterview.DAL.EntityMaps;
 
-public class ContactMap : IEntityTypeConfiguration<Contact>
+internal class ContactMap : IEntityTypeConfiguration<Contact>
 {
     public void Configure(EntityTypeBuilder<Contact> builder)
     {

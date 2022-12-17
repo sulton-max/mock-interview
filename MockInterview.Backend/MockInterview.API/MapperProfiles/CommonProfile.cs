@@ -26,6 +26,9 @@ public class CommonProfile : Profile
         CreateMap<Interviewer, InterviewerDto>();
         CreateMap<InterviewerDto, Interviewer>();
         
+        CreateMap<SelectionItem, SelectionItemDto>();
+        CreateMap<SelectionItemDto, SelectionItem>();
+        
         #endregion
     }
 }

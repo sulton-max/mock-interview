@@ -1,4 +1,6 @@
-﻿using MockInterview.DAL.Contexts;
+﻿using MockInterview.Core.Models.Entities;
+using MockInterview.DAL.Contexts;
+using Newtonsoft.Json;
 
 namespace MockInterview.API.SeedData;
 
@@ -19,5 +21,20 @@ public static class SeedData
 
         if (dbContext == null)
             throw new InvalidOperationException();
+
+        SeedSelectionItems(dbContext, hostEnvironment);
+    }
+
+    public static void SeedSelectionItems(ApplicationDbContext dbContext, IWebHostEnvironment hostEnvironment)
+    {
+        if (dbContext.SelectionItems.Any())
+            return;
+
+        var selectionItemsData = JsonConvert
+            .DeserializeObject<IEnumerable<SelectionItem>>
+                (File.ReadAllText(Path.Combine(hostEnvironment.ContentRootPath, "SeedData", "Data", "SelectionItemsData.json")))!;
+
+        dbContext.SelectionItems.AddRange(selectionItemsData);
+        dbContext.SaveChanges();
     }
 }

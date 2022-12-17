@@ -4,7 +4,7 @@ using MockInterview.Core.Models.Entities;
 
 namespace MockInterview.DAL.EntityMaps;
 
-public class UserMap : IEntityTypeConfiguration<User>
+internal class UserMap : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {

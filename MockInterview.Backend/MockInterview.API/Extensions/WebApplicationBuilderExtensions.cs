@@ -89,7 +89,8 @@ public static class WebApplicationBuilderExtensions
             .AddScoped<IContactService, ContactService>()
             .AddScoped<ITalentService, TalentService>()
             .AddScoped<IInterviewerService, InterviewerService>()
-            .AddScoped<IIntervieweeService, IntervieweeService>();
+            .AddScoped<IIntervieweeService, IntervieweeService>()
+            .AddScoped<ISelectionItemService, SelectionItemService>();
         
         return builder;
     }
