@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockInterview.API", "MockInterview.API\MockInterview.API.csproj", "{C88A9513-2F93-4A31-A2E2-FE8D56A92925}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MockInterview.Core", "MockInterview.Core\MockInterview.Core.csproj", "{75DDBF43-1D46-4E43-910B-D5E44756C5B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{C88A9513-2F93-4A31-A2E2-FE8D56A92925}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C88A9513-2F93-4A31-A2E2-FE8D56A92925}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C88A9513-2F93-4A31-A2E2-FE8D56A92925}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75DDBF43-1D46-4E43-910B-D5E44756C5B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75DDBF43-1D46-4E43-910B-D5E44756C5B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75DDBF43-1D46-4E43-910B-D5E44756C5B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75DDBF43-1D46-4E43-910B-D5E44756C5B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
