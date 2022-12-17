@@ -15,4 +15,10 @@
       <Folder Include="Controllers" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MockInterview.BLL\MockInterview.BLL.csproj" />
+      <ProjectReference Include="..\MockInterview.Core\MockInterview.Core.csproj" />
+      <ProjectReference Include="..\MockInterview.DAL\MockInterview.DAL.csproj" />
+    </ItemGroup>
+
 </Project>
