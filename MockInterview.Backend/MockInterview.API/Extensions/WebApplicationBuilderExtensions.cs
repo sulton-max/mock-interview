@@ -81,8 +81,16 @@ public static class WebApplicationBuilderExtensions
                 builder.Services.AddScoped(specificInterface, specificImplementation);
             });
 
+        // Add converters
+        builder.Services.AddAutoMapper(typeof(Program));
+        
         //Add specific Entity services
-
+        builder.Services.AddScoped<IUserService, UserService>()
+            .AddScoped<IContactService, ContactService>()
+            .AddScoped<ITalentService, TalentService>()
+            .AddScoped<IInterviewerService, InterviewerService>()
+            .AddScoped<IIntervieweeService, IntervieweeService>();
+        
         return builder;
     }
     

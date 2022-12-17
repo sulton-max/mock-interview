@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MockInterview.API.Controllers;
 
@@ -6,12 +7,10 @@ namespace MockInterview.API.Controllers;
 [Route("api/[controller]")]
 public class CustomControllerBase : ControllerBase
 {
-    protected readonly IWebHostEnvironment HostEnvironment;
-    protected readonly ILogger Logger;
+    protected readonly IMapper Mapper;
 
-    public CustomControllerBase(IWebHostEnvironment hostEnvironment, ILogger logger)
+    public CustomControllerBase(IMapper mapper)
     {
-        HostEnvironment = hostEnvironment;
-        Logger = logger;
+        Mapper = mapper;
     }
 }

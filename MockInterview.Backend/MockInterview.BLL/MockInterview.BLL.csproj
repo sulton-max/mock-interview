@@ -14,7 +14,6 @@
     <ItemGroup>
       <Folder Include="Extensions" />
       <Folder Include="Models\Configurations" />
-      <Folder Include="Models\DTOs" />
     </ItemGroup>
 
 </Project>
