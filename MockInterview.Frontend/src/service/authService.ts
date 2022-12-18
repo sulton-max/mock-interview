@@ -1,6 +1,6 @@
 import ServiceBase from "@/service/serviceBase";
 import {UserDto} from "@/types/userDto";
-import {DataResponse, ErrorResponse} from "@/types/common";
+import {DataResponse} from "@/types/common";
 import {UserTokenDto} from "@/types/userTokenDto";
 import {AuthenticationDetail} from "@/types/authenticationDetail";
 import {ProblemDetails} from "@/types/problemDetails";
