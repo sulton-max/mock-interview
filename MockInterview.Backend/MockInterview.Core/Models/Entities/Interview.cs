@@ -15,11 +15,6 @@ public class Interview : IEntity
     public long InterviewerId { get; set; }
     
     /// <summary>
-    /// Interviewee user Id
-    /// </summary>
-    public long IntervieweeId { get; set; }
-    
-    /// <summary>
     /// Interview record created date
     /// </summary>
     public DateTime CreatedDate { get; set; }
@@ -37,7 +32,7 @@ public class Interview : IEntity
     /// <summary>
     /// Current status
     /// </summary>
-    public string Status { get; set; } = null!;
+    public string? Status { get; set; } 
     
     /// <summary>
     /// Payment made for this interview

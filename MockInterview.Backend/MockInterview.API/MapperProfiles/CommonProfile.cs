@@ -20,9 +20,6 @@ public class CommonProfile : Profile
         CreateMap<Talent, TalentDto>();
         CreateMap<TalentDto, Talent>();
         
-        CreateMap<Interviewee, IntervieweeDto>();
-        CreateMap<IntervieweeDto, Interviewee>();
-        
         CreateMap<Interviewer, InterviewerDto>();
         CreateMap<InterviewerDto, Interviewer>();
         
