@@ -11,7 +11,8 @@ export default new Vuetify({
         },
         themes: {
             light: {
-                lightBlue: '#F5F8FF'
+                lightBlue: '#F5F8FF',
+                darkBlue: '#191E3A'
             },
         },
     },

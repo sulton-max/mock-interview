@@ -69,12 +69,11 @@ export class DataResponse<T extends IMappable<T>> extends ApiResponse{
     }
 }
 
-export class DataSetResponse<T extends IMappable<T>> extends ApiResponse {
+export class DataSetResponse<T extends IMappable<T>> {
     public data!: Array<T>;
     type!: Constructor<T>;
 
     constructor(type: Constructor<T>, initialData: object) {
-        super();
         this.type = type;
 
         if(initialData != null) {
@@ -83,8 +82,6 @@ export class DataSetResponse<T extends IMappable<T>> extends ApiResponse {
     }
 
     public mapFrom(data: object) {
-        super.mapFrom(data);
-
         const dataObjArray = data["data" as keyof object] as Array<object>;
         if (dataObjArray != null) {
             this.data = new Array<T>();

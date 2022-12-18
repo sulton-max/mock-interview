@@ -6,7 +6,7 @@ export default class ServiceBase {
     protected getClient(): AxiosInstance{
         if (this.client == null) {
             this.client = axios.create({
-                baseURL: "api/"
+                baseURL: "/api"
             })
         }
         return this.client;
