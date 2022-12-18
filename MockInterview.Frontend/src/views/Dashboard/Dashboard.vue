@@ -27,9 +27,7 @@
     </v-navigation-drawer>
 
     <v-main class="pa-0">
-      <v-container>
-        <router-view/>
-      </v-container>
+      <router-view/>
     </v-main>
   </v-app>
 </template>

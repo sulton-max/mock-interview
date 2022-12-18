@@ -16,6 +16,12 @@ export class ProblemDetails implements IMappable<IProblemDetails> {
     detail?: string | undefined;
     instance?: string | undefined;
 
+    public constructor(initialData?: object) {
+        if (initialData != null) {
+            this.mapFrom(initialData);
+        }
+    }
+
     mapFrom(data: IProblemDetails) {
         this.type = data.type;
         this.title = data.title;

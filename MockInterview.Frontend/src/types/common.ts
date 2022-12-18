@@ -1,56 +1,16 @@
+import {AxiosResponse} from "axios";
+
 type Constructor<T extends {} = {}> = new (...args: any[]) => T;
 
 export interface IMappable<T> {
     mapFrom(data: object): void
 }
 
-export enum ErrorCode{
-    Unknown,
-    InternalServerError,
-    BadRequest,
-    ValidationError,
-    NotFound,
-    Unauthorized
-}
-
-export interface IErrorResponse {
-    message: string;
-    code: ErrorCode
-}
-
-export class ErrorResponse {
-    public message!: string;
-    public code!: ErrorCode;
-
-    public mapFrom(data: IErrorResponse): void{
-        this.message = data['message'];
-        this.code = data['code'];
-    }
-}
-
-export class ApiResponse implements IMappable<ApiResponse> {
-    public successful!: boolean;
-    public error!: ErrorResponse | null;
-
-
-    public constructor(initialData?: object) {
-        if (initialData != null) {
-            this.mapFrom(initialData);
-        }
-    }
-
-    public mapFrom(data: object): void {
-        this.successful = data["successful" as keyof object];
-        this.error = Util.mapObject(data["error" as keyof object], ErrorResponse);
-    }
-}
-
-export class DataResponse<T extends IMappable<T>> extends ApiResponse{
+export class DataResponse<T extends IMappable<T>>{
     public data!: T;
     type!: Constructor<T>;
 
-    constructor(type: Constructor<T>, initialData: object) {
-        super();
+    constructor(type: Constructor<T>, initialData: object | AxiosResponse<any, any> | undefined) {
         this.type = type;
 
         if(initialData != null) {
@@ -59,8 +19,6 @@ export class DataResponse<T extends IMappable<T>> extends ApiResponse{
     }
 
     public mapFrom(data: object): void{
-        super.mapFrom(data);
-
         const dataObj = data["data" as keyof object];
         if(dataObj != null) {
             this.data = new this.type();
