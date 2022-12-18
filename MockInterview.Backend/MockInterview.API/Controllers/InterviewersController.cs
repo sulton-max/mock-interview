@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MockInterview.BLL.Models.DTOs;
 using MockInterview.BLL.Services.EntityServices.Interfaces;
 using MockInterview.Core.Models.Entities;
+using MockInterview.DAL.Models.Query;
 
 namespace MockInterview.API.Controllers;
 
@@ -14,8 +15,8 @@ public class InterviewersController : CustomControllerBase
     {
         _interviewerService = interviewerService;
     }
-    
-     /// <summary>
+
+    /// <summary>
     /// Gets specific Interviewer by Id
     /// </summary>
     /// <param name="id">Id of the Interviewer being queried</param>
@@ -30,6 +31,23 @@ public class InterviewersController : CustomControllerBase
         var data = await _interviewerService.GetByIdAsync(id);
         return data != null ? Ok(Mapper.Map<InterviewerDto>(data)) : NotFound();
     }
+
+    /// <summary>
+    /// Gets a set of interviewers by filter
+    /// </summary>
+    /// <param name="filter">Filter for query</param>
+    /// <returns>Set of interviewers being queried</returns>
+    /// <response code="200">If any interviewers found </response>
+    /// <response code="404">If no interviewers found</response>
+    [HttpPost("by-filter")]
+    [ProducesResponseType(typeof(InterviewerDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetByFilter([FromBody] EntityQueryOptions<Interviewer> filter)
+    {
+        var data = await _interviewerService.GetByFilterAsync(filter);
+        return data.Any() ? Ok(Mapper.Map<IEnumerable<InterviewerDto>>(data)) : NotFound();
+    }
+
 
     /// <summary>
     /// Creates a Interviewer

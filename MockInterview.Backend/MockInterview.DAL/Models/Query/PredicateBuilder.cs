@@ -9,9 +9,14 @@ namespace MockInterview.DAL.Models.Query;
 public static class PredicateBuilder<TSource> where TSource : class
 {
     /// <summary>
-    /// Initial expression
+    /// Initial true expression
     /// </summary>
     public static Expression<Func<TSource, bool>> True = entity => true;
+    
+    /// <summary>
+    /// Initial false expression
+    /// </summary>
+    public static Expression<Func<TSource, bool>> False = entity => false;
 
     /// <summary>
     /// Joins to expression with OR logic

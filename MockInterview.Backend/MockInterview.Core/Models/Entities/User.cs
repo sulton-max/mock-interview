@@ -1,4 +1,5 @@
-﻿using MockInterview.Core.Models.Common;
+﻿using MockInterview.Core.Models.Attributes;
+using MockInterview.Core.Models.Common;
 
 namespace MockInterview.Core.Models.Entities;
 
@@ -12,11 +13,13 @@ public class User : IEntity
     /// <summary>
     /// First name
     /// </summary>
+    [SearchableProperty]
     public string FirstName { get; set; } = null!;
 
     /// <summary>
     /// Lastname 
     /// </summary>
+    [SearchableProperty]
     public string LastName { get; set; } = null!;
 
     /// <summary>
@@ -47,7 +50,7 @@ public class User : IEntity
     /// <summary>
     /// Related contact Id
     /// </summary>
-    public long ContactId { get; set; }
+    public long? ContactId { get; set; }
     
     /// <summary>
     /// Related talent Id

@@ -17,7 +17,7 @@ public class Talent : IEntity
     /// <summary>
     /// Earned experience
     /// </summary>
-    public string Experience { get; set; } = null!;
+    public int Experience { get; set; }
 
     /// <summary>
     /// Worked projects

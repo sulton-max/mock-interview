@@ -1,5 +1,9 @@
 ﻿namespace MockInterview.DAL.Models.Query;
 
+/// <summary>
+/// Represents filtering options
+/// </summary>
+/// <typeparam name="TSource"></typeparam>
 public class FilterOptions<TSource> where TSource : class
 {
     public FilterOptions()

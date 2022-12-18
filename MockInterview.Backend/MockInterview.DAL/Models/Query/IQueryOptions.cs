@@ -1,11 +1,16 @@
 ﻿namespace MockInterview.DAL.Models.Query;
 
 /// <summary>
-/// Query options to query a set of entities
+/// Defines properties for queryable source query options
 /// </summary>
 /// <typeparam name="TSource">Query source type</typeparam>
 public interface IQueryOptions<TSource> where TSource : class
 {
+    /// <summary>
+    /// Query searching options
+    /// </summary>
+    SearchOptions<TSource>? SearchOptions { get; set; }
+    
     /// <summary>
     /// Applied filters for a query
     /// </summary>
@@ -20,4 +25,5 @@ public interface IQueryOptions<TSource> where TSource : class
     /// Calculated pagination options
     /// </summary>
     PaginationOptions PaginationOptions { get; set; }
+    
 }

@@ -1,7 +1,13 @@
 ﻿namespace MockInterview.DAL.Models.Query;
 
+/// <summary>
+/// Represents queryable source query options
+/// </summary>
+/// <typeparam name="TSource"></typeparam>
 public class QueryOptions<TSource> : IQueryOptions<TSource> where TSource : class
 {
+    public SearchOptions<TSource>? SearchOptions { get; set; }
+    
     public FilterOptions<TSource>? FilterOptions { get; set; }
     
     public SortOptions? SortOptions { get; set; }
