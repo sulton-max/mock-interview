@@ -117,7 +117,6 @@ public static class WebApplicationBuilderExtensions
             .AddScoped<IContactService, ContactService>()
             .AddScoped<ITalentService, TalentService>()
             .AddScoped<IInterviewerService, InterviewerService>()
-            .AddScoped<IIntervieweeService, IntervieweeService>()
             .AddScoped<ISelectionItemService, SelectionItemService>()
             .AddScoped<IInterviewService, InterviewService>()
             .AddScoped<IJwtGenerator, JwtGenerator>()

@@ -28,15 +28,15 @@ public class InterviewDto : IEntityDto
     /// <summary>
     /// Current status
     /// </summary>
-    public string Status { get; set; } = null!;
+    public string? Status { get; set; }
     
+    /// <summary>
+    /// Related interviewer Id
+    /// </summary>
+    public long? InterviewerId { get; set; } = null!;
+
     /// <summary>
     /// Related interviewer projection
     /// </summary>
-    public InterviewerDto Interviewer { get; set; } = null!;
-
-    /// <summary>
-    /// Related interviewee projection
-    /// </summary>
-    public IntervieweeDto Interviewee { get; set; } = null!;
+    public InterviewerDto? Interviewer { get; set; }
 }

@@ -45,6 +45,9 @@ namespace MockInterview.BLL.Services.AuthenticationServices
             if(model == null) 
                 throw new ArgumentNullException(nameof(model));
 
+            if(await _userService.GetByEmailAddressAsync(model.EmailAddress) != null) 
+                throw new ArgumentException("User already exists");
+
             return await Task.Run(async () =>
             {
                 User? user = await _userService.CreateAsync(model);

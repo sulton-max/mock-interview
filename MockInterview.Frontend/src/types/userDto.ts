@@ -21,7 +21,7 @@ export class UserDto implements IMappable<IUserDto> {
     lastName!: string;
     emailAddress!: string;
     gender!: string;
-    dateOfBirth!: Date;
+    dateOfBirth!: Date | string;
     photoStorageId!: number;
     password!: string;
     contact!: ContactDto | null;

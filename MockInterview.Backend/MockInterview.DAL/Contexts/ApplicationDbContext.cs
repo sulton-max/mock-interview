@@ -12,7 +12,6 @@ public class ApplicationDbContext : DbContext
     public DbSet<User> Users => Set<User>();
     public DbSet<Contact> Contacts => Set<Contact>();
     public DbSet<Talent> Talents => Set<Talent>();
-    public DbSet<Interviewee> Interviewees => Set<Interviewee>();
     public DbSet<Interviewer> Interviewers => Set<Interviewer>();
     public DbSet<SelectionItem> SelectionItems => Set<SelectionItem>();
     public DbSet<Interview> Interviews => Set<Interview>();
@@ -27,7 +26,6 @@ public class ApplicationDbContext : DbContext
         modelBuilder.ApplyConfiguration(new UserMap())
             .ApplyConfiguration(new ContactMap())
             .ApplyConfiguration(new TalentMap())
-            .ApplyConfiguration(new IntervieweeMap())
             .ApplyConfiguration(new InterviewerMap())
             .ApplyConfiguration(new SelectionItemMap())
             .ApplyConfiguration(new InterviewMap())

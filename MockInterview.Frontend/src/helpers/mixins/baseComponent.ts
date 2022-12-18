@@ -32,8 +32,7 @@ export default class BaseComponent extends Vue {
             this.loadingFail();
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            sweetAlertError(error)
-            throw error;
+            sweetAlertError(error.message)
         }
     }
 
