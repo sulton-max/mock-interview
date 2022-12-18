@@ -166,7 +166,7 @@ public static class WebApplicationBuilderExtensions
     /// <returns>Web App Builder for method chaining</returns>
     public static WebApplicationBuilder AddCustomControllers(this WebApplicationBuilder builder)
     {
-        builder.Services.AddControllers(options => { options.Filters.Add(new ExceptionFilter()); })
+        builder.Services.AddControllers(options => { options.Filters.Add(new ExceptionFilter(builder.Environment)); })
             .AddNewtonsoftJson(options => { options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; });
 
         return builder;

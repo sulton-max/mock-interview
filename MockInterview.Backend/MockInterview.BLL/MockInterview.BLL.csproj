@@ -16,4 +16,8 @@
       <Folder Include="Models\Configurations" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="11.4.0" />
+    </ItemGroup>
+
 </Project>
