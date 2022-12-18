@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MockInterview.BLL.Services.EntityServices.Interfaces;
 using MockInterview.Core.Models.Entities;
+using MockInterview.DAL.Extensions;
+using MockInterview.DAL.Models.Query;
 using MockInterview.DAL.Repositories.Interfaces;
 
 namespace MockInterview.BLL.Services.EntityServices;

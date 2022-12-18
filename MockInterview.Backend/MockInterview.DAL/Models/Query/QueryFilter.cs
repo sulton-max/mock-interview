@@ -1,7 +1,7 @@
 ﻿namespace MockInterview.DAL.Models.Query;
 
 /// <summary>
-/// Represents query filter for entity properties
+/// Represents queryable source query options
 /// </summary>
 public class QueryFilter
 {

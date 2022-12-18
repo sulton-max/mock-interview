@@ -22,7 +22,7 @@ public class EntityServiceBase<TEntity, TRepository> : IEntityServiceBase<TEntit
         EntityRepository = entityRepository;
     }
 
-    public async Task<IEnumerable<TEntity>> GetByFilterAsync(IEntityQueryOptions<TEntity> queryOptions)
+    public virtual async Task<IEnumerable<TEntity>> GetByFilterAsync(IEntityQueryOptions<TEntity> queryOptions)
     {
         ArgumentNullException.ThrowIfNull(queryOptions);
 

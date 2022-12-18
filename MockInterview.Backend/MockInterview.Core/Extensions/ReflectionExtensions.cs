@@ -23,7 +23,7 @@ public static class ReflectionExtensions
     /// <param name="child">Type checked as derived or implementing type</param>
     /// <param name="parent">Type checked as parent or interface type</param>
     /// <returns>Result of the check, true if does inherit or implement</returns>
-    private static bool InheritsOrImplementsHalf(Type child, ref Type parent)
+    public static bool InheritsOrImplementsHalf(this Type child, ref Type parent)
     {
         parent = ResolveGenericTypeDefinition(parent);
         var currentChild = child.IsGenericType
