@@ -53,4 +53,9 @@ public class UserDto : IEntityDto
     /// Talent projection
     /// </summary>
     public TalentDto? Talent { get; set; }
+
+    /// <summary>
+    /// User Role projection
+    /// </summary>
+    public UserRoleDto Role { get; set;} = null!;
 }

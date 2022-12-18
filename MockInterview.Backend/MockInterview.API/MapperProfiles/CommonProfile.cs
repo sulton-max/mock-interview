@@ -32,6 +32,8 @@ public class CommonProfile : Profile
         CreateMap<Interview, InterviewDto>();
         CreateMap<InterviewDto, Interview>();
         
+        CreateMap<UserRole, UserRoleDto>();
+        CreateMap<UserRoleDto, UserRole>();
         #endregion
     }
 }

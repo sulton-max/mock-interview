@@ -22,7 +22,7 @@ namespace MockInterview.API.Controllers
         /// <returns>Login user into system</returns>
         /// <response code="200">If user login succeeded</response>
         /// <response code="400">If user login failed</response>
-        [HttpPost("/login")]
+        [HttpPost("login")]
         [ProducesResponseType(typeof(UserTokenDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<UserTokenDto>> Login([FromBody] AuthenticationDetails model)
@@ -38,13 +38,22 @@ namespace MockInterview.API.Controllers
         /// <returns>Register user</returns>
         /// <response code="200">If user register succeeded</response>
         /// <response code="400">If user register failed</response>
-        [HttpPost("/register")]
+        [HttpPost("register")]
         [ProducesResponseType(typeof(UserTokenDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<UserTokenDto>> Register([FromBody] UserDto model)
         {
             var data = await _authService.RegisterAsync(Mapper.Map<User>(model));
             return data != null ? CreatedAtAction(nameof(Register), Mapper.Map<UserTokenDto>(data)) : Unauthorized();
+        }
+
+        [HttpPost("user/{id:long}/role")]
+        [ProducesResponseType(typeof(UserTokenDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<User>> UpdateRole([FromRoute] long id, )
+        {
+            var data = await _authService.UpdateRole(Mapper.Map<User>(model));
+            return data != null ? CreatedAtAction(nameof(UpdateRole), Mapper.Map<User>(data)) : Unauthorized();
         }
     }
 }
