@@ -14,8 +14,8 @@ public class TalentsController : CustomControllerBase
     {
         _talentService = talentService;
     }
-    
-      /// <summary>
+
+    /// <summary>
     /// Gets specific Talent by Id
     /// </summary>
     /// <param name="id">Id of the Talent being queried</param>

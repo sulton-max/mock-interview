@@ -2,8 +2,8 @@ using MockInterview.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder
-    .AddConfigurations()
+builder.AddConfigurations()
+    .AddCustomLogging()
     .AddDbContexts()
     .AddEntityRepositories()
     .AddEntityServices()
@@ -17,10 +17,10 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseOpenApiTools();
     app.UseSeedData();
 }
 
+app.UseOpenApiTools();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthorization();

@@ -1,9 +1,11 @@
-﻿namespace MockInterview.BLL.Models.DTOs;
+﻿using MockInterview.BLL.Models.Common;
+
+namespace MockInterview.BLL.Models.DTOs;
 
 /// <summary>
 /// Represents contact information
 /// </summary>
-public class ContactDto
+public class ContactDto : IEntityDto
 {
     public long Id { get; set; }
     

@@ -2,7 +2,7 @@
 using MockInterview.BLL.Services.EntityServices.Interfaces;
 using MockInterview.Core.Exceptions;
 using MockInterview.Core.Models.Common;
-using MockInterview.DAL.Repositories.interfaces;
+using MockInterview.DAL.Repositories.Interfaces;
 
 namespace MockInterview.BLL.Services.EntityServices;
 

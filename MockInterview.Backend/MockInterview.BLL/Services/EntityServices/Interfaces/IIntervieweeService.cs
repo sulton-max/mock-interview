@@ -3,7 +3,7 @@
 namespace MockInterview.BLL.Services.EntityServices.Interfaces;
 
 /// <summary>
-/// Defines methods to manipulate interviewer details
+/// Defines methods to manipulate interviewee details
 /// </summary>
 public interface IIntervieweeService : IEntityServiceBase<Interviewee>
 {

@@ -7,6 +7,11 @@ namespace MockInterview.Core.Models.Entities;
 /// </summary>
 public class Interviewee : IEntity
 {
+    public Interviewee()
+    {
+        Interviews = new List<Interview>();
+    }
+    
     public long Id { get; set; }
     
     /// <summary>
@@ -18,4 +23,9 @@ public class Interviewee : IEntity
     /// User projection
     /// </summary>
     public User User { get; set; } = null!;
+    
+    /// <summary>
+    /// Recorded interviews
+    /// </summary>
+    public IEnumerable<Interview> Interviews { get; set; }
 }
