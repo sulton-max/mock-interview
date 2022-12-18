@@ -25,7 +25,7 @@ public class ContactsController : CustomControllerBase
     [HttpGet("{id:long}")]
     [ProducesResponseType(typeof(ContactDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Contact>> GetById([FromRoute] long id)
+    public async Task<IActionResult> GetById([FromRoute] long id)
     {
         var data = await _contactService.GetByIdAsync(id);
         return data != null ? Ok(Mapper.Map<ContactDto>(data)) : NotFound();
@@ -41,7 +41,7 @@ public class ContactsController : CustomControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(ContactDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Contact>> Create([FromBody] ContactDto model)
+    public async Task<IActionResult> Create([FromBody] ContactDto model)
     {
         var data = await _contactService.CreateAsync(Mapper.Map<Contact>(model));
         return data != null ? CreatedAtAction(nameof(Create), Mapper.Map<ContactDto>(data)) : BadRequest();
@@ -57,7 +57,7 @@ public class ContactsController : CustomControllerBase
     [HttpPut("{id:long}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Update([FromRoute] long id, [FromBody] ContactDto model)
+    public async Task<IActionResult> Update([FromRoute] long id, [FromBody] ContactDto model)
     {
         return await _contactService.UpdateAsync(id, Mapper.Map<Contact>(model)) ? NoContent() : BadRequest();
     }
@@ -72,7 +72,7 @@ public class ContactsController : CustomControllerBase
     [HttpDelete("{id:long}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> DeleteById([FromRoute] long id)
+    public async Task<IActionResult> DeleteById([FromRoute] long id)
     {
         var result = await _contactService.DeleteByIdAsync(id);
         return result ? Ok() : BadRequest();

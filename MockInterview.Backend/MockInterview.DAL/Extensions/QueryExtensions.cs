@@ -106,14 +106,14 @@ public static class QueryExtensions
 
         // Get the properties type  of entity
         var parameter = Expression.Parameter(typeof(TSource));
-        var properties = typeof(TSource).GetProperties();
+        var properties = typeof(TSource).GetProperties().Where(x => x.PropertyType.IsSimpleType()).ToList();
 
         // Convert filters to predicate expressions
-        var predicates = filterOptions.Filters.Where(x => properties.Any(y => y.Name == x.Key))
+        var predicates = filterOptions.Filters.Where(x => properties.Any(y => y.Name.ToLower() == x.Key.ToLower()))
             .Select(x =>
             {
                 // Create predicate expression
-                var property = properties.First(y => y.Name == x.Key);
+                var property = properties.First(y => y.Name.ToLower() == x.Key.ToLower());
                 var member = Expression.PropertyOrField(parameter, x.Key);
 
                 // Create specific expression based on type
@@ -172,7 +172,8 @@ public static class QueryExtensions
         var properties = typeof(TEntity).GetProperties();
 
         // Include models
-        var includeProperties = typeof(TEntity).GetProperties().Where(x => x.PropertyType.IsClass && includeOptions.IncludeModels.Contains(x.Name)).ToList();
+        includeOptions.IncludeModels = includeOptions.IncludeModels.Select(x => x.ToLower());
+        var includeProperties = typeof(TEntity).GetProperties().Where(x => x.PropertyType.IsClass && includeOptions.IncludeModels.Contains(x.Name.ToLower())).ToList();
         includeProperties.ForEach(x => { source.Include(x.Name); });
 
         return source;
@@ -196,10 +197,10 @@ public static class QueryExtensions
 
         // Get the properties type  of entity
         var parameter = Expression.Parameter(typeof(TSource));
-        var properties = typeof(TSource).GetProperties();
+        var properties = typeof(TSource).GetProperties().Where(x => x.PropertyType.IsSimpleType()).ToList();
 
         // Apply sorting
-        var matchingProperty = properties.FirstOrDefault(x => x.Name == sortOptions.SortField) ?? throw new InvalidOperationException();
+        var matchingProperty = properties.FirstOrDefault(x => x.Name.ToLower() == sortOptions.SortField.ToLower()) ?? throw new InvalidOperationException();
         var memExp = Expression.Convert(Expression.PropertyOrField(parameter, matchingProperty.Name), typeof(object));
         var keySelector = Expression.Lambda<Func<TSource, dynamic>>(memExp, true, parameter);
         return sortOptions.SortAscending ? source.OrderBy(keySelector) : source.OrderByDescending(keySelector);
@@ -219,10 +220,10 @@ public static class QueryExtensions
 
         // Get the properties type  of entity
         var parameter = Expression.Parameter(typeof(TSource));
-        var properties = typeof(TSource).GetProperties();
+        var properties = typeof(TSource).GetProperties().Where(x => x.PropertyType.IsSimpleType()).ToList();
 
         // Apply sorting
-        var matchingProperty = properties.FirstOrDefault(x => x.Name == sortOptions.SortField) ?? throw new InvalidOperationException();
+        var matchingProperty = properties.FirstOrDefault(x => x.Name.ToLower() == sortOptions.SortField.ToLower()) ?? throw new InvalidOperationException();
         var memExp = Expression.PropertyOrField(parameter, matchingProperty.Name);
         var keySelector = Expression.Lambda<Func<TSource, object>>(memExp, true, parameter).Compile();
 

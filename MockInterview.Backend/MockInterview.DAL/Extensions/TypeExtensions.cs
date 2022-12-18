@@ -10,6 +10,13 @@ namespace MockInterview.DAL.Extensions;
 public static class TypeExtensions
 {
     /// <summary>
+    /// Checks if type is simple
+    /// </summary>
+    /// <param name="type">Type to check</param>
+    /// <returns>True if type is simple, otherwise false</returns>
+    public static bool IsSimpleType(this Type type) => type.IsPrimitive || type.Equals(typeof(string)) || type.Equals(typeof(DateTime));
+    
+    /// <summary>
     /// Gets appropriate comparing method for a type
     /// </summary>
     /// <param name="type">Type in request</param>
@@ -21,7 +28,7 @@ public static class TypeExtensions
     {
         ArgumentNullException.ThrowIfNull(type);
 
-        if (!(type.IsPrimitive || type.Equals(typeof(string)) || type.Equals(typeof(DateTime))))
+        if(!type.IsSimpleType())
             throw new ArgumentException("Not a primitive type");
 
         var methodName = type == typeof(string) ? "Contains" : "Equals";
@@ -42,7 +49,7 @@ public static class TypeExtensions
         ArgumentNullException.ThrowIfNull(filter);
         ArgumentNullException.ThrowIfNull(type);
 
-        if (!(type.IsPrimitive || type.Equals(typeof(string)) || type.Equals(typeof(DateTime))))
+        if(!type.IsSimpleType())
             throw new ArgumentException("Not a primitive type");
 
         // Return string or parsed value

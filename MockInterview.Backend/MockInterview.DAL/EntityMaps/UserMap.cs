@@ -13,7 +13,7 @@ internal class UserMap : IEntityTypeConfiguration<User>
         builder.Property(x => x.FirstName).IsRequired();
         builder.Property(x => x.LastName).IsRequired();
         builder.Property(x => x.Gender).IsRequired();
-        builder.Property(x => x.Email).IsRequired();
+        builder.Property(x => x.EmailAddress).IsRequired();
         builder.Property(x => x.Password).IsRequired();
 
         builder.HasOne<Interviewee>().WithOne(x => x.User).HasForeignKey<Interviewee>(x => x.UserId);

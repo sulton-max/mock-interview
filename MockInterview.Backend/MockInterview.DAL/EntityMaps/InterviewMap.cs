@@ -12,7 +12,7 @@ internal class InterviewMap : IEntityTypeConfiguration<Interview>
 
         builder.Property(x => x.Status).IsRequired().HasMaxLength(64);
 
-        builder.HasOne<Interviewer>().WithMany(x => x.Interviews).HasForeignKey(x => x.InterviewerUserId);
-        builder.HasOne<Interviewee>().WithMany(x => x.Interviews).HasForeignKey(x => x.IntervieweeUserId);
+        builder.HasOne<Interviewer>().WithMany().HasForeignKey(x => x.InterviewerId).OnDelete(DeleteBehavior.NoAction);
+        builder.HasOne<Interviewee>().WithMany().HasForeignKey(x => x.IntervieweeId).OnDelete(DeleteBehavior.NoAction);
     }
-}
+}   

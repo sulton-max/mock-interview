@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MockInterview.BLL.Models.DTOs;
 using MockInterview.BLL.Services.EntityServices.Interfaces;
 using MockInterview.Core.Models.Entities;
+using MockInterview.DAL.Models.Query;
 
 namespace MockInterview.API.Controllers;
 
@@ -30,6 +31,22 @@ public class TalentsController : CustomControllerBase
         var data = await _talentService.GetByIdAsync(id);
         return data != null ? Ok(Mapper.Map<TalentDto>(data)) : NotFound();
     }
+    
+    /// <summary>
+    /// Gets a set of talents by filter
+    /// </summary>
+    /// <param name="filter">Filter for query</param>
+    /// <returns>Set of talents being queried</returns>
+    /// <response code="200">If any talents found </response>
+    /// <response code="404">If no talents found</response>
+    [HttpPost("by-filter")]
+    [ProducesResponseType(typeof(TalentDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetByFilter([FromBody] EntityQueryOptions<Talent> filter)
+    {
+        var data = await _talentService.GetByFilterAsync(filter);
+        return data.Any() ? Ok(Mapper.Map<IEnumerable<TalentDto>>(data)) : NotFound();
+    }
 
     /// <summary>
     /// Creates a Talent
@@ -41,7 +58,7 @@ public class TalentsController : CustomControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(TalentDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Talent>> Create([FromBody] TalentDto model)
+    public async Task<IActionResult> Create([FromBody] TalentDto model)
     {
         var data = await _talentService.CreateAsync(Mapper.Map<Talent>(model));
         return data != null ? CreatedAtAction(nameof(Create), Mapper.Map<TalentDto>(data)) : BadRequest();
@@ -57,7 +74,7 @@ public class TalentsController : CustomControllerBase
     [HttpPut("{id:long}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Update([FromRoute] long id, [FromBody] TalentDto model)
+    public async Task<IActionResult> Update([FromRoute] long id, [FromBody] TalentDto model)
     {
         return await _talentService.UpdateAsync(id, Mapper.Map<Talent>(model)) ? NoContent() : BadRequest();
     }
@@ -72,7 +89,7 @@ public class TalentsController : CustomControllerBase
     [HttpDelete("{id:long}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> DeleteById([FromRoute] long id)
+    public async Task<IActionResult> DeleteById([FromRoute] long id)
     {
         var result = await _talentService.DeleteByIdAsync(id);
         return result ? Ok() : BadRequest();

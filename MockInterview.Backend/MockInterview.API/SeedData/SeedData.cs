@@ -23,9 +23,15 @@ public static class SeedData
             throw new InvalidOperationException();
 
         SeedSelectionItems(dbContext, hostEnvironment);
+
+        // Add development seed data
+        if (hostEnvironment.IsDevelopment())
+        {
+            SeedUsers(dbContext, hostEnvironment);
+        }
     }
 
-    public static void SeedSelectionItems(ApplicationDbContext dbContext, IWebHostEnvironment hostEnvironment)
+    private static void SeedSelectionItems(ApplicationDbContext dbContext, IWebHostEnvironment hostEnvironment)
     {
         if (dbContext.SelectionItems.Any())
             return;
@@ -35,6 +41,19 @@ public static class SeedData
                 (File.ReadAllText(Path.Combine(hostEnvironment.ContentRootPath, "SeedData", "Data", "SelectionItemsData.json")))!;
 
         dbContext.SelectionItems.AddRange(selectionItemsData);
+        dbContext.SaveChanges();
+    }
+    
+    private static void SeedUsers(ApplicationDbContext dbContext, IWebHostEnvironment hostEnvironment)
+    {
+        if (dbContext.Users.Any())
+            return;
+
+        var usersData = JsonConvert
+            .DeserializeObject<IEnumerable<User>>
+                (File.ReadAllText(Path.Combine(hostEnvironment.ContentRootPath, "SeedData", "Data", "UsersData.json")))!;
+        
+        dbContext.Users.AddRange(usersData);
         dbContext.SaveChanges();
     }
 }

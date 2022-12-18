@@ -22,7 +22,7 @@ public class User : IEntity
     /// <summary>
     /// Email address
     /// </summary>
-    public string Email { get; set; } = null!;
+    public string EmailAddress { get; set; } = null!;
 
     /// <summary>
     /// Gender

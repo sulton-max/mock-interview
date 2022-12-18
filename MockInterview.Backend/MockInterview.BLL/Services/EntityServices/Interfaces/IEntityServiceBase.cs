@@ -1,4 +1,5 @@
 ﻿using MockInterview.Core.Models.Common;
+using MockInterview.DAL.Models.Query;
 
 namespace MockInterview.BLL.Services.EntityServices.Interfaces;
 
@@ -8,6 +9,13 @@ namespace MockInterview.BLL.Services.EntityServices.Interfaces;
 /// <typeparam name="TEntity">Entity type</typeparam>
 public interface IEntityServiceBase<TEntity> where TEntity : class, IEntity
 {
+    /// <summary>
+    /// Gets a set of entities by filter
+    /// </summary>
+    /// <param name="queryOptions">Complex query options</param>
+    /// <returns>Set of entities after query</returns>
+    Task<IEnumerable<TEntity>> GetByFilterAsync(IEntityQueryOptions<TEntity> queryOptions);
+
     /// <summary>
     /// Gets the entity that has the required id
     /// </summary>
@@ -23,7 +31,7 @@ public interface IEntityServiceBase<TEntity> where TEntity : class, IEntity
     Task<IEnumerable<TEntity>> GetByIdsAsync(ICollection<long> ids);
 
     /// <summary>
-    /// Creates entry on Context scope or on Database
+    /// Creates entry on context scope or on database
     /// </summary>
     /// <param name="entity">Entity to create</param>
     /// <param name="saveChanges">Determines whether to commit changes to Database</param>
@@ -31,7 +39,7 @@ public interface IEntityServiceBase<TEntity> where TEntity : class, IEntity
     Task<TEntity?> CreateAsync(TEntity entity, bool saveChanges = true);
 
     /// <summary>
-    /// Updates entity on context scope or on Database
+    /// Updates entity on context scope or on database
     /// </summary>
     /// <param name="entity">Entity to update</param>
     /// <param name="saveChanges">Determines whether to commit changes to Database</param>
@@ -39,7 +47,7 @@ public interface IEntityServiceBase<TEntity> where TEntity : class, IEntity
     Task<bool> UpdateAsync(long id, TEntity entity, bool saveChanges = true);
 
     /// <summary>
-    /// Deletes entity on context scope or on Database with its Id
+    /// Deletes entity on context scope or on database with its Id
     /// </summary>
     /// <param name="id">Id of Entity to delete</param>
     /// <param name="saveChanges">Determines whether to commit changes to Database</param>
@@ -47,7 +55,7 @@ public interface IEntityServiceBase<TEntity> where TEntity : class, IEntity
     Task<bool> DeleteByIdAsync(long id, bool saveChanges = true);
 
     /// <summary>
-    /// Deletes entity on context scope or on Database
+    /// Deletes entity on context scope or on database
     /// </summary>
     /// <param name="entity">Entity to delete</param>
     /// <param name="saveChanges">Determines whether to commit changes to Database</param>

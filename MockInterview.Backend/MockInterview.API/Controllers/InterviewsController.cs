@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MockInterview.BLL.Models.DTOs;
 using MockInterview.BLL.Services.EntityServices.Interfaces;
 using MockInterview.Core.Models.Entities;
+using MockInterview.DAL.Models.Query;
 
 namespace MockInterview.API.Controllers;
 
@@ -25,11 +26,27 @@ public class InterviewsController : CustomControllerBase
     [HttpGet("{id:long}")]
     [ProducesResponseType(typeof(InterviewDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Interview>> GetById([FromRoute] long id)
+    public async Task<IActionResult> GetById([FromRoute] long id)
     {
         var data = await _interviewService.GetByIdAsync(id);
         return data != null ? Ok(Mapper.Map<InterviewDto>(data)) : NotFound();
     }
+     
+     /// <summary>
+     /// Gets a set of interviews by filter
+     /// </summary>
+     /// <param name="filter">Filter for query</param>
+     /// <returns>Set of interviews being queried</returns>
+     /// <response code="200">If any interviews found </response>
+     /// <response code="404">If no interviews found</response>
+     [HttpPost("by-filter")]
+     [ProducesResponseType(typeof(InterviewDto), StatusCodes.Status200OK)]
+     [ProducesResponseType(StatusCodes.Status404NotFound)]
+     public async Task<IActionResult> GetByFilter([FromBody] EntityQueryOptions<Interview> filter)
+     {
+         var data = await _interviewService.GetByFilterAsync(filter);
+         return data.Any() ? Ok(Mapper.Map<IEnumerable<InterviewDto>>(data)) : NotFound();
+     }
 
     /// <summary>
     /// Creates a Interview
@@ -41,7 +58,7 @@ public class InterviewsController : CustomControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(InterviewDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Interview>> Create([FromBody] InterviewDto model)
+    public async Task<IActionResult> Create([FromBody] InterviewDto model)
     {
         var data = await _interviewService.CreateAsync(Mapper.Map<Interview>(model));
         return data != null ? CreatedAtAction(nameof(Create), Mapper.Map<InterviewDto>(data)) : BadRequest();
@@ -57,7 +74,7 @@ public class InterviewsController : CustomControllerBase
     [HttpPut("{id:long}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Update([FromRoute] long id, [FromBody] InterviewDto model)
+    public async Task<IActionResult> Update([FromRoute] long id, [FromBody] InterviewDto model)
     {
         return await _interviewService.UpdateAsync(id, Mapper.Map<Interview>(model)) ? NoContent() : BadRequest();
     }
@@ -72,7 +89,7 @@ public class InterviewsController : CustomControllerBase
     [HttpDelete("{id:long}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> DeleteById([FromRoute] long id)
+    public async Task<IActionResult> DeleteById([FromRoute] long id)
     {
         var result = await _interviewService.DeleteByIdAsync(id);
         return result ? Ok() : BadRequest();

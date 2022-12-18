@@ -2,6 +2,8 @@
 using MockInterview.BLL.Services.EntityServices.Interfaces;
 using MockInterview.Core.Exceptions;
 using MockInterview.Core.Models.Common;
+using MockInterview.DAL.Extensions;
+using MockInterview.DAL.Models.Query;
 using MockInterview.DAL.Repositories.Interfaces;
 
 namespace MockInterview.BLL.Services.EntityServices;
@@ -18,6 +20,16 @@ public class EntityServiceBase<TEntity, TRepository> : IEntityServiceBase<TEntit
     public EntityServiceBase(TRepository entityRepository)
     {
         EntityRepository = entityRepository;
+    }
+
+    public async Task<IEnumerable<TEntity>> GetByFilterAsync(IEntityQueryOptions<TEntity> queryOptions)
+    {
+        ArgumentNullException.ThrowIfNull(queryOptions);
+
+        return await Task.Run(() =>
+        {
+            return EntityRepository.Get(x => true).ApplyQuery(queryOptions).ToList();
+        });
     }
 
     public virtual async Task<TEntity?> GetByIdAsync(long id)

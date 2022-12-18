@@ -12,12 +12,12 @@ public class Interview : IEntity
     /// <summary>
     /// Interviewer user Id
     /// </summary>
-    public long InterviewerUserId { get; set; }
+    public long InterviewerId { get; set; }
     
     /// <summary>
     /// Interviewee user Id
     /// </summary>
-    public long IntervieweeUserId { get; set; }
+    public long IntervieweeId { get; set; }
     
     /// <summary>
     /// Interview record created date

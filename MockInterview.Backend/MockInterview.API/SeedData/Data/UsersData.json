@@ -1,0 +1,41 @@
+[
+    {
+        "firstName": "Osiyo",
+        "lastName": "Odilova",
+        "emailAddress": "osiyoadilova03@gmail.com",
+        "gender": "Female",
+        "dateOfBirth": "2005-01-01T05:00:11.341Z",
+        "photoStorageId": 0,
+        "password": "sdfsdf",
+        "contact": {
+            "id": 0,
+            "phoneNumber": 123123123
+        }
+    },
+    {
+        "firstName": "Tohirjon",
+        "lastName": "Odilov",
+        "emailAddress": "odilovtohirbek009@gmail.com",
+        "gender": "Male",
+        "dateOfBirth": "2003-01-01T05:00:11.341Z",
+        "photoStorageId": 0,
+        "password": "sdfsdf",
+        "contact": {
+            "id": 0,
+            "phoneNumber": 123123123
+        }
+    },
+    {
+        "firstName": "Sultonbek",
+        "lastName": "Rakhimov",
+        "emailAddress": "sultonbek.rakhimov@gmail.com",
+        "gender": "Male",
+        "dateOfBirth": "2000-04-25T05:00:11.341Z",
+        "photoStorageId": 0,
+        "password": "sdfsdf",
+        "contact": {
+            "id": 0,
+            "phoneNumber": 123123123
+        }
+    }
+]

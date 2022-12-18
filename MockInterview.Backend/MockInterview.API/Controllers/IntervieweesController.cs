@@ -25,7 +25,7 @@ public class IntervieweesController : CustomControllerBase
     [HttpGet("{id:long}")]
     [ProducesResponseType(typeof(IntervieweeDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<Interviewee>> GetById([FromRoute] long id)
+    public async Task<IActionResult> GetById([FromRoute] long id)
     {
         var data = await _intervieweeService.GetByIdAsync(id);
         return data != null ? Ok(Mapper.Map<IntervieweeDto>(data)) : NotFound();
@@ -41,7 +41,7 @@ public class IntervieweesController : CustomControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(IntervieweeDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Interviewee>> Create([FromBody] IntervieweeDto model)
+    public async Task<IActionResult> Create([FromBody] IntervieweeDto model)
     {
         var data = await _intervieweeService.CreateAsync(Mapper.Map<Interviewee>(model));
         return data != null ? CreatedAtAction(nameof(Create), Mapper.Map<IntervieweeDto>(data)) : BadRequest();
@@ -57,7 +57,7 @@ public class IntervieweesController : CustomControllerBase
     [HttpPut("{id:long}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Update([FromRoute] long id, [FromBody] IntervieweeDto model)
+    public async Task<IActionResult> Update([FromRoute] long id, [FromBody] IntervieweeDto model)
     {
         return await _intervieweeService.UpdateAsync(id, Mapper.Map<Interviewee>(model)) ? NoContent() : BadRequest();
     }
@@ -72,7 +72,7 @@ public class IntervieweesController : CustomControllerBase
     [HttpDelete("{id:long}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> DeleteById([FromRoute] long id)
+    public async Task<IActionResult> DeleteById([FromRoute] long id)
     {
         var result = await _intervieweeService.DeleteByIdAsync(id);
         return result ? Ok() : BadRequest();

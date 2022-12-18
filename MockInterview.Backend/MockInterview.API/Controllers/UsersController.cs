@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using MockInterview.BLL.Models.DTOs;
 using MockInterview.BLL.Services.EntityServices.Interfaces;
 using MockInterview.Core.Models.Entities;
+using MockInterview.DAL.Models.Query;
 
 namespace MockInterview.API.Controllers;
 
@@ -25,10 +26,26 @@ public class UsersController : CustomControllerBase
     [HttpGet("{id:long}")]
     [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<User>> GetById([FromRoute] long id)
+    public async Task<IActionResult> GetById([FromRoute] long id)
     {
         var data = await _userService.GetByIdAsync(id);
         return data != null ? Ok(Mapper.Map<UserDto>(data)) : NotFound();
+    }
+    
+    /// <summary>
+    /// Gets a set of users by filter
+    /// </summary>
+    /// <param name="filter">Filter for query</param>
+    /// <returns>Set of users being queried</returns>
+    /// <response code="200">If any users found </response>
+    /// <response code="404">If no users found</response>
+    [HttpPost("by-filter")]
+    [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetByFilter([FromBody] EntityQueryOptions<User> filter)
+    {
+        var data = await _userService.GetByFilterAsync(filter);
+        return data.Any() ? Ok(Mapper.Map<IEnumerable<UserDto>>(data)) : NotFound();
     }
 
     /// <summary>
@@ -41,7 +58,7 @@ public class UsersController : CustomControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<User>> Create([FromBody] UserDto model)
+    public async Task<IActionResult> Create([FromBody] UserDto model)
     {
         var data = await _userService.CreateAsync(Mapper.Map<User>(model));
         return data != null ? CreatedAtAction(nameof(Create), Mapper.Map<UserDto>(data)) : BadRequest();
@@ -57,7 +74,7 @@ public class UsersController : CustomControllerBase
     [HttpPut("{id:long}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> Update([FromRoute] long id, [FromBody] UserDto model)
+    public async Task<IActionResult> Update([FromRoute] long id, [FromBody] UserDto model)
     {
         return await _userService.UpdateAsync(id, Mapper.Map<User>(model)) ? NoContent() : BadRequest();
     }
@@ -72,7 +89,7 @@ public class UsersController : CustomControllerBase
     [HttpDelete("{id:long}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult> DeleteById([FromRoute] long id)
+    public async Task<IActionResult> DeleteById([FromRoute] long id)
     {
         var result = await _userService.DeleteByIdAsync(id);
         return result ? Ok() : BadRequest();
