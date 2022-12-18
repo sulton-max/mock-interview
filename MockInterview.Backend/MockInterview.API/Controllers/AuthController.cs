@@ -47,13 +47,19 @@ namespace MockInterview.API.Controllers
             return data != null ? CreatedAtAction(nameof(Register), Mapper.Map<UserTokenDto>(data)) : Unauthorized();
         }
 
-        [HttpPost("user/{id:long}/role")]
-        [ProducesResponseType(typeof(UserTokenDto), StatusCodes.Status200OK)]
+        /// <summary>
+        /// Updates specific user's role
+        /// </summary>
+        /// <param name="id">Id of the user being updated</param>
+        /// <param name="userRole">new role name</param>
+        /// <response code="204">If User Role update succeeded</response>
+        /// <response code="400">If User Role update failed</response>
+        [HttpPut("user/{id:long}/role/{userRole}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<User>> UpdateRole([FromRoute] long id, )
+        public async Task<ActionResult> UpdateRole([FromRoute] long id, [FromRoute] string userRole)
         {
-            var data = await _authService.UpdateRole(Mapper.Map<User>(model));
-            return data != null ? CreatedAtAction(nameof(UpdateRole), Mapper.Map<User>(data)) : Unauthorized();
+            return await _authService.UpdateUserRoleAsync(id, userRole) ? NoContent() : BadRequest();
         }
     }
 }

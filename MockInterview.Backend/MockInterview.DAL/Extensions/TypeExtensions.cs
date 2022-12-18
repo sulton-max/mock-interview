@@ -15,26 +15,27 @@ public static class TypeExtensions
     /// <param name="type">Type to check</param>
     /// <returns>True if type is simple, otherwise false</returns>
     public static bool IsSimpleType(this Type type) => type.IsPrimitive || type.Equals(typeof(string)) || type.Equals(typeof(DateTime));
-    
+
     /// <summary>
-    /// Gets appropriate comparing method for a type
+    /// Gets appropriate search method for a type
     /// </summary>
     /// <param name="type">Type in request</param>
+    /// <param name="searchComparing">Determines whether to use search comparing methods</param>
     /// <returns>Method info of the compare method</returns>
     /// <exception cref="ArgumentException">If type is not primitive</exception>
     /// <exception cref="ArgumentNullException">If type is null</exception>
     /// <exception cref="InvalidOperationException">If not method found</exception>
-    public static MethodInfo GetCompareMethod(this Type type)
+    public static MethodInfo GetCompareMethod(this Type type, bool searchComparing = false)
     {
         ArgumentNullException.ThrowIfNull(type);
 
         if(!type.IsSimpleType())
             throw new ArgumentException("Not a primitive type");
 
-        var methodName = type == typeof(string) ? "Contains" : "Equals";
+        var methodName = type == typeof(string) && searchComparing ? "Contains" : "Equals";
         return type.GetMethod(methodName, new[] { type }) ?? throw new InvalidOperationException("Method not found");
     }
-
+    
     /// <summary>
     /// Gets value in appropriate type in boxed format
     /// </summary>
