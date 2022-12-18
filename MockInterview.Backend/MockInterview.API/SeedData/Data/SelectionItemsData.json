@@ -1,0 +1,29 @@
+[
+    {
+        "type": "ExperienceLevel",
+        "displayValue": "Intern",
+        "value": "Junior"
+    },
+    {
+        "type": "ExperienceLevel",
+        "displayValue": "Junior",
+        "value": "Junior"
+    },
+    {
+        "type": "ExperienceLevel",
+        "displayValue": "Strong Junior",
+        "value": "StrongJunior"
+    },
+    {
+        "type": "ExperienceLevel",
+        "displayValue": "Middle",
+        "value": "Middle"
+    },
+    {
+        "type": "ExperienceLevel",
+        "displayValue": "Senior",
+        "value": "Senior"
+    }
+]
+    
+    
