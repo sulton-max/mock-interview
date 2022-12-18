@@ -4,7 +4,7 @@ using MockInterview.Core.Models.Enums;
 namespace MockInterview.BLL.Services.EntityServices.Interfaces;
 
 /// <summary>
-/// Defines methods for SelectionItem resource Business Logic
+/// Defines methods for selectable item resource business Logic
 /// </summary>
 public interface ISelectionItemService : IEntityServiceBase<SelectionItem>
 {

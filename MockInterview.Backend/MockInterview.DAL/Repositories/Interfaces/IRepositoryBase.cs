@@ -2,7 +2,7 @@
 using MockInterview.Core.Models.Common;
 using MockInterview.DAL.Contexts;
 
-namespace MockInterview.DAL.Repositories.interfaces;
+namespace MockInterview.DAL.Repositories.Interfaces;
 
 /// <summary>
 /// Defines common behaviors for entity generic repository base

@@ -1,12 +1,12 @@
 ﻿using MockInterview.BLL.Services.EntityServices.Interfaces;
 using MockInterview.Core.Models.Entities;
 using MockInterview.Core.Models.Enums;
-using MockInterview.DAL.Repositories.interfaces;
+using MockInterview.DAL.Repositories.Interfaces;
 
 namespace MockInterview.BLL.Services.EntityServices;
 
 /// <summary>
-/// Provides methods for SelectionItem item Business Logic
+/// Provides methods for selectable item resource business Logic
 /// </summary>
 public class SelectionItemService : EntityServiceBase<SelectionItem, IRepositoryBase<SelectionItem>>, ISelectionItemService
 {
