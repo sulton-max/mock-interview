@@ -8,5 +8,7 @@ namespace MockInterview.BLL.Services.AuthenticationServices.Interfaces
         Task<UserTokenDto> LoginAsync(AuthenticationDetails model);
 
         Task<UserTokenDto> RegisterAsync(User model);
+
+        Task<bool> UpdateUserRoleAsync(long id, string userRole);
     }
 }

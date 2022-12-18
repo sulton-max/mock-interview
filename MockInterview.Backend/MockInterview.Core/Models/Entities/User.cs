@@ -62,7 +62,7 @@ public class User : IEntity
     /// <summary>
     /// Contact projection
     /// </summary>
-    public Contact Contact { get; set; } = null!;
+    public Contact? Contact { get; set; } 
     
     /// <summary>
     /// Talent projection
@@ -72,5 +72,5 @@ public class User : IEntity
     /// <summary>
     /// User role in system
     /// </summary>
-    public UserRole Role { get; set; } = null!;
+    public UserRole? Role { get; set; }
 }

@@ -9,11 +9,15 @@ namespace MockInterview.BLL.Services.AuthenticationServices
     {
         private readonly IJwtGenerator _jwtGenerator;
         private readonly IUserService _userService;
+        private readonly IUserRoleService _userRoleService;
+        private readonly IInterviewerService _interviewerService;
 
-        public AuthService(IJwtGenerator jwtGenerator, IUserService userService)
+        public AuthService(IJwtGenerator jwtGenerator, IUserService userService, IUserRoleService userRoleService, IInterviewerService interviewerService)
         {
             _jwtGenerator = jwtGenerator;
             _userService = userService;
+            _userRoleService = userRoleService;
+            _interviewerService = interviewerService;
         }
 
         public async Task<UserTokenDto?> LoginAsync(AuthenticationDetails model)
@@ -45,6 +49,36 @@ namespace MockInterview.BLL.Services.AuthenticationServices
             {
                 User? user = await _userService.CreateAsync(model);
                 return await GetTokenAsync(new AuthenticationDetails { EmailAddress = user.EmailAddress, Password = user.Password});
+            });
+        }
+
+        public async Task<bool> UpdateUserRoleAsync(long id, string userRole)
+        {
+            if(id <= 0) 
+                throw new ArgumentException();
+
+            User? user = await _userService.GetByIdAsync(id);
+            
+            if(user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            if (string.IsNullOrWhiteSpace(userRole))
+                throw new ArgumentNullException(nameof(userRole));
+
+            UserRole? role = await _userRoleService.GetByNameAsync(userRole);
+
+            if(role == null)       
+                throw new ArgumentNullException(nameof(role));
+
+            return await Task.Run(async () =>
+            {
+                user.RoleId = role.Id;
+
+                Interviewer? interviewer = await _interviewerService.CreateAsync(new Interviewer{ UserId = user.Id });
+                
+                bool userUpdateResult = await _userService.UpdateAsync(id, user);
+
+                return interviewer != null && userUpdateResult;
             });
         }
 

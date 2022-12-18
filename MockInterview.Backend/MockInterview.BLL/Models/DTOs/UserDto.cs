@@ -47,7 +47,7 @@ public class UserDto : IEntityDto
     /// <summary>
     /// Contact projection
     /// </summary>
-    public ContactDto Contact { get; set; } = null!;
+    public ContactDto? Contact { get; set; }
     
     /// <summary>
     /// Talent projection
@@ -57,5 +57,5 @@ public class UserDto : IEntityDto
     /// <summary>
     /// User Role projection
     /// </summary>
-    public UserRoleDto Role { get; set;} = null!;
+    public UserRoleDto? Role { get; set;} 
 }

@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MockInterview.BLL.Models.DTOs;
-using MockInterview.BLL.Services.AuthenticationServices.Interfaces;
 using MockInterview.BLL.Services.EntityServices.Interfaces;
-using MockInterview.Core.Models.Common;
 using MockInterview.Core.Models.Entities;
 using MockInterview.DAL.Repositories.Interfaces;
 
