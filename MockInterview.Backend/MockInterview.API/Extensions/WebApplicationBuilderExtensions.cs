@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MockInterview.API.Filters;
+using MockInterview.BLL.Services.AuthenticationServices;
+using MockInterview.BLL.Services.AuthenticationServices.Interfaces;
 using MockInterview.BLL.Services.EntityServices;
 using MockInterview.BLL.Services.EntityServices.Interfaces;
 using MockInterview.Core.Constants;
@@ -117,7 +119,9 @@ public static class WebApplicationBuilderExtensions
             .AddScoped<IInterviewerService, InterviewerService>()
             .AddScoped<IIntervieweeService, IntervieweeService>()
             .AddScoped<ISelectionItemService, SelectionItemService>()
-            .AddScoped<IInterviewService, InterviewService>();
+            .AddScoped<IInterviewService, InterviewService>()
+            .AddScoped<IJwtGenerator, JwtGenerator>()
+            .AddScoped<IAuthService, AuthService>();
         
         return builder;
     }

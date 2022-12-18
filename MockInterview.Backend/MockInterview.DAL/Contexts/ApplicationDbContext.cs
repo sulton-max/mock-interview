@@ -16,6 +16,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Interviewer> Interviewers => Set<Interviewer>();
     public DbSet<SelectionItem> SelectionItems => Set<SelectionItem>();
     public DbSet<Interview> Interviews => Set<Interview>();
+    public DbSet<UserRole> UserRoles => Set<UserRole>();
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -29,6 +30,7 @@ public class ApplicationDbContext : DbContext
             .ApplyConfiguration(new IntervieweeMap())
             .ApplyConfiguration(new InterviewerMap())
             .ApplyConfiguration(new SelectionItemMap())
-            .ApplyConfiguration(new InterviewMap());
+            .ApplyConfiguration(new InterviewMap())
+            .ApplyConfiguration(new UserRoleMap());
     }
 }

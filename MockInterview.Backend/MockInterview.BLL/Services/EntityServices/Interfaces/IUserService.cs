@@ -7,4 +7,5 @@ namespace MockInterview.BLL.Services.EntityServices.Interfaces;
 /// </summary>
 public interface IUserService : IEntityServiceBase<User>
 {
+    Task<User?> GetByEmailAddressAsync(string email);
 }

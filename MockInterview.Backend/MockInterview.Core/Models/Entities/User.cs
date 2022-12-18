@@ -55,6 +55,11 @@ public class User : IEntity
     public long? TalentId { get; set; }
 
     /// <summary>
+    /// Related role Id
+    /// </summary>
+    public long? RoleId { get; set; }
+
+    /// <summary>
     /// Contact projection
     /// </summary>
     public Contact Contact { get; set; } = null!;
@@ -63,4 +68,9 @@ public class User : IEntity
     /// Talent projection
     /// </summary>
     public Talent? Talent { get; set; }
+
+    /// <summary>
+    /// User role in system
+    /// </summary>
+    public UserRole Role { get; set; } = null!;
 }

@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MockInterview.BLL.Models.DTOs;
+using MockInterview.BLL.Services.AuthenticationServices.Interfaces;
 using MockInterview.BLL.Services.EntityServices.Interfaces;
+using MockInterview.Core.Models.Common;
 using MockInterview.Core.Models.Entities;
 using MockInterview.DAL.Repositories.Interfaces;
 
@@ -21,7 +24,33 @@ public class UserService : EntityServiceBase<User, IRepositoryBase<User>>, IUser
 
         return await Task.Run(() =>
         {
-            var model = EntityRepository.Get(x => x.Id == id).Include(x => x.Talent).Include(x => x.Talent).FirstOrDefault();
+            var model = EntityRepository.Get(x => x.Id == id).Include(x => x.Talent).Include(x => x.Talent).Include(x => x.Role).FirstOrDefault();
+            return model;
+        });
+    }
+
+    public override async Task<User?> CreateAsync(User model, bool saveChanges = true)
+    {
+        if (model == null)
+            throw new ArgumentException(nameof(model));
+
+        return await Task.Run(async () =>
+        {
+            model.Id = 0;
+            model.RoleId = 3;
+            EntityRepository.Create(model);
+            return await EntityRepository.SaveChangesAsync() ? model : throw new InvalidOperationException();
+        });
+    }
+
+    public async Task<User?> GetByEmailAddressAsync(string email)
+    {
+        if(string.IsNullOrWhiteSpace(email)) 
+            throw new ArgumentException();
+
+        return await Task.Run(() =>
+        {
+            var model = EntityRepository.Get(x => x.EmailAddress == email).Include(x => x.Talent).Include(x => x.Role).FirstOrDefault();
             return model;
         });
     }

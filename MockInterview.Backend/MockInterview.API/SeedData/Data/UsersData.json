@@ -10,7 +10,8 @@
         "contact": {
             "id": 0,
             "phoneNumber": 123123123
-        }
+        },
+        "roleId": "1"
     },
     {
         "firstName": "Tohirjon",
@@ -23,7 +24,8 @@
         "contact": {
             "id": 0,
             "phoneNumber": 123123123
-        }
+        },
+        "roleId": "2"
     },
     {
         "firstName": "Sultonbek",
@@ -36,6 +38,7 @@
         "contact": {
             "id": 0,
             "phoneNumber": 123123123
-        }
+        },
+        "roleId": "3"
     }
 ]

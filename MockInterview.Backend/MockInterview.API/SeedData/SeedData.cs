@@ -27,6 +27,7 @@ public static class SeedData
         // Add development seed data
         if (hostEnvironment.IsDevelopment())
         {
+            SeedRoles(dbContext, hostEnvironment);
             SeedUsers(dbContext, hostEnvironment);
         }
     }
@@ -41,6 +42,19 @@ public static class SeedData
                 (File.ReadAllText(Path.Combine(hostEnvironment.ContentRootPath, "SeedData", "Data", "SelectionItemsData.json")))!;
 
         dbContext.SelectionItems.AddRange(selectionItemsData);
+        dbContext.SaveChanges();
+    }
+
+    private static void SeedRoles(ApplicationDbContext dbContext, IWebHostEnvironment hostEnvironment)
+    {
+        if (dbContext.UserRoles.Any())
+            return;
+
+        var userRolesData = JsonConvert
+            .DeserializeObject<IEnumerable<UserRole>>
+                (File.ReadAllText(Path.Combine(hostEnvironment.ContentRootPath, "SeedData", "Data", "UserRolesData.json")))!;
+        
+        dbContext.UserRoles.AddRange(userRolesData);
         dbContext.SaveChanges();
     }
     

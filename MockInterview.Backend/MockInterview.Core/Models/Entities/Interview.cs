@@ -43,14 +43,4 @@ public class Interview : IEntity
     /// Payment made for this interview
     /// </summary>
     public long? PaymentId { get; set; }
-
-    /// <summary>
-    /// Related interviewer projection
-    /// </summary>
-    public Interviewer Interviewer { get; set; } = null!;
-
-    /// <summary>
-    /// Related interviewee projection
-    /// </summary>
-    public Interviewee Interviewee { get; set; } = null!;
 }

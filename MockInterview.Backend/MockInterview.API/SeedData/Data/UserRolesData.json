@@ -1,0 +1,17 @@
+﻿[
+  {
+    "name": "Admin",
+    "dateCreated": "2022-01-01T05:00:11.341Z",
+    "dateLastModified": "2022-01-02T05:00:11.341Z"
+  },
+  {
+    "name": "Interviewer",
+    "dateCreated": "2022-01-01T05:00:11.341Z",
+    "dateLastModified": "2022-01-02T05:00:11.341Z"
+  },
+  {
+    "name": "User",
+    "dateCreated": "2022-01-01T05:00:11.341Z",
+    "dateLastModified": "2022-01-02T05:00:11.341Z"
+  }
+]
