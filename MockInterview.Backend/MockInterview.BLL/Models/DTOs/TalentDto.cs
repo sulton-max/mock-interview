@@ -1,9 +1,11 @@
-﻿namespace MockInterview.BLL.Models.DTOs;
+﻿using MockInterview.BLL.Models.Common;
+
+namespace MockInterview.BLL.Models.DTOs;
 
 /// <summary>
 /// Represents talented person
 /// </summary>
-public class TalentDto
+public class TalentDto : IEntityDto
 {
     public long Id { get; set; }
     

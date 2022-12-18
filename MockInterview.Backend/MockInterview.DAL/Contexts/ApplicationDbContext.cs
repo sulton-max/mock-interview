@@ -15,6 +15,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Interviewee> Interviewees => Set<Interviewee>();
     public DbSet<Interviewer> Interviewers => Set<Interviewer>();
     public DbSet<SelectionItem> SelectionItems => Set<SelectionItem>();
+    public DbSet<Interview> Interviews => Set<Interview>();
     
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {
@@ -27,6 +28,7 @@ public class ApplicationDbContext : DbContext
             .ApplyConfiguration(new TalentMap())
             .ApplyConfiguration(new IntervieweeMap())
             .ApplyConfiguration(new InterviewerMap())
-            .ApplyConfiguration(new SelectionItemMap());
+            .ApplyConfiguration(new SelectionItemMap())
+            .ApplyConfiguration(new InterviewMap());
     }
 }

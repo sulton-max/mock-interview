@@ -10,6 +10,7 @@ using MockInterview.DAL.Contexts;
 using MockInterview.DAL.Repositories;
 using MockInterview.DAL.Repositories.interfaces;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace MockInterview.API.Extensions;
 
@@ -27,6 +28,31 @@ public static class WebApplicationBuilderExtensions
             .Where(x => x.PropertyType.InheritsOrImplements(typeof(DbSet<>)))
             .Select(x => x.PropertyType.GenericTypeArguments.First())
             .ToList();
+    
+    
+    /// <summary>
+    /// Registers Configuration objects to Service Collection
+    /// </summary>
+    /// <param name="builder">Web App Builder</param>
+    /// <returns>Web App Builder for method chaining</returns>
+    public static WebApplicationBuilder AddConfigurations(this WebApplicationBuilder builder)
+    {
+        return builder;
+    }
+    
+    /// <summary>
+    /// Registers Dev tools to service collections
+    /// </summary>
+    /// <param name="builder">Web App Builder</param>
+    /// <returns>Web App Builder for method chaining</returns>
+    public static WebApplicationBuilder AddCustomLogging(this WebApplicationBuilder builder)
+    {
+        builder.Logging.ClearProviders();
+        var logger = new LoggerConfiguration().ReadFrom.Configuration(builder.Configuration).CreateLogger();
+        builder.Host.UseSerilog(logger);   
+        
+        return builder;
+    }
 
     /// <summary>
     /// Registers Database contexts to Service Collection
@@ -90,7 +116,8 @@ public static class WebApplicationBuilderExtensions
             .AddScoped<ITalentService, TalentService>()
             .AddScoped<IInterviewerService, InterviewerService>()
             .AddScoped<IIntervieweeService, IntervieweeService>()
-            .AddScoped<ISelectionItemService, SelectionItemService>();
+            .AddScoped<ISelectionItemService, SelectionItemService>()
+            .AddScoped<IInterviewService, InterviewService>();
         
         return builder;
     }
@@ -111,16 +138,6 @@ public static class WebApplicationBuilderExtensions
     /// <param name="builder"></param>
     /// <returns>Web App Builder for method chaining</returns>
     public static WebApplicationBuilder AddValidations(this WebApplicationBuilder builder)
-    {
-        return builder;
-    }
-
-    /// <summary>
-    /// Registers Configuration objects to Service Collection
-    /// </summary>
-    /// <param name="builder">Web App Builder</param>
-    /// <returns>Web App Builder for method chaining</returns>
-    public static WebApplicationBuilder AddConfigurations(this WebApplicationBuilder builder)
     {
         return builder;
     }

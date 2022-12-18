@@ -1,9 +1,11 @@
-﻿namespace MockInterview.BLL.Models.DTOs;
+﻿using MockInterview.BLL.Models.Common;
+
+namespace MockInterview.BLL.Models.DTOs;
 
 /// <summary>
 /// Represents system user
 /// </summary>
-public class UserDto
+public class UserDto : IEntityDto
 {
     public long Id { get; set; }
 
@@ -20,7 +22,7 @@ public class UserDto
     /// <summary>
     /// Email address
     /// </summary>
-    public string Email { get; set; } = null!;
+    public string EmailAddress { get; set; } = null!;
 
     /// <summary>
     /// Gender
