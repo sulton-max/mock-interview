@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MockInterview.Core.Models.Common;
 using MockInterview.DAL.Contexts;
-using MockInterview.DAL.Repositories.interfaces;
+using MockInterview.DAL.Repositories.Interfaces;
 
 namespace MockInterview.DAL.Repositories;
 

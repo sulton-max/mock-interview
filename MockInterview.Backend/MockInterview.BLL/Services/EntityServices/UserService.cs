@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MockInterview.BLL.Services.EntityServices.Interfaces;
 using MockInterview.Core.Models.Entities;
-using MockInterview.DAL.Repositories.interfaces;
+using MockInterview.DAL.Repositories.Interfaces;
 
 namespace MockInterview.BLL.Services.EntityServices;
 
+/// <summary>
+/// Provides methods to manipulate system user
+/// </summary>
 public class UserService : EntityServiceBase<User, IRepositoryBase<User>>, IUserService
 {
     public UserService(IRepositoryBase<User> entityRepository) : base(entityRepository)

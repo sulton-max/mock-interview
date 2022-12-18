@@ -8,7 +8,7 @@ using MockInterview.Core.Constants;
 using MockInterview.Core.Extensions;
 using MockInterview.DAL.Contexts;
 using MockInterview.DAL.Repositories;
-using MockInterview.DAL.Repositories.interfaces;
+using MockInterview.DAL.Repositories.Interfaces;
 using Newtonsoft.Json;
 using Serilog;
 

@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MockInterview.BLL.Services.EntityServices.Interfaces;
 using MockInterview.Core.Models.Entities;
-using MockInterview.DAL.Repositories.interfaces;
+using MockInterview.DAL.Repositories.Interfaces;
 
 namespace MockInterview.BLL.Services.EntityServices;
 
+/// <summary>
+/// Provides methods to manipulate interviewee details
+/// </summary>
 public class IntervieweeService : EntityServiceBase<Interviewee, IRepositoryBase<Interviewee>>, IIntervieweeService
 {
     public IntervieweeService(IRepositoryBase<Interviewee> entityRepository) : base(entityRepository)
